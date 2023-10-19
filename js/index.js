@@ -36,7 +36,7 @@ const displayVideos = (videos) => {
                     class="video-card__thumbnail">
                 <h3 class="video-card__title">${video.snippet.title}</h3>
                 <p class="video-card__channel">${video.snippet.channelTitle}</p>
-                <p class="video-card__duration">${video.contentDetails.duration}</p>
+                <p class="video-card__duration">${getCorrectDurationTime(video.contentDetails.duration)}</p>
             </a>
             <button class="video-card__favorite " type="button" aria-label="Добавить в избранное">
                 <svg class="favorite__icon">
@@ -49,6 +49,45 @@ const displayVideos = (videos) => {
         return li;
     });
     videoListItems.append(...videoList);
+}
+
+const getCorrectDurationTime = (duration) => {
+    let hours = 0;
+    let minutes = 0;
+    let seconds = 0;
+ 
+    duration = duration.replace('PT','');
+ 
+    if (duration.indexOf('H') > -1) {
+        var hours_split = duration.split('H');
+        hours = parseInt(hours_split[0]);
+        duration  = hours_split[1];
+    }
+ 
+    if (duration.indexOf('M') > -1) {
+        var minutes_split = duration.split('M');
+        minutes = parseInt(minutes_split[0]);
+        duration = minutes_split[1];
+    }
+ 
+    if (duration.indexOf('S') > -1) {
+        var seconds_split = duration.split('S');
+        seconds = parseInt(seconds_split[0]);
+    }
+ 
+    let str = "";
+    
+    if (hours != 0 && hours == 1) { str += hours + " час "; }
+    if (hours != 0 && hours >= 2) { str += hours + " часa "; }
+    if (minutes == 0) { str += "00" +  " мин "; }
+    else if (minutes < 10) { str += "0" + minutes + " мин "; }
+    else if (minutes > 10) { str += minutes + " мин "; }
+ 
+    if (seconds > 0 && seconds < 10) { str += "0" + seconds + " сек"; }
+    else if (seconds < 10) { str += "0" + seconds + " сек"; }
+    else if (seconds > 10) { str += seconds + " сек"; }
+ 
+    return str;
 }
 
 fetchTrendingVideos().then(displayVideos);
