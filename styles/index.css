@@ -36,6 +36,12 @@ body {
   line-height: 1.2;
   color: #292D32;
   background-color: #FFF6EB;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
 }
 
 
@@ -242,13 +248,15 @@ iframe {
 }
 
 .video-list__items {
+  --grid-count: 3;
+  --grid-column-gap: 12px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px 12px;
-}
+  grid-template-columns: repeat(
+    var(--grid-count), 
+    calc(100% / var(--grid-count) - (var(--grid-column-gap) * (var(--grid-count) - 1) / var(--grid-count)))
+    );
+  gap: 40px var(--grid-column-gap);
 
-.video-list__items {
-  width: 100%;
 }
 
 .video-card {
@@ -541,7 +549,7 @@ iframe {
   }
 
   .video-list__items {
-    grid-template-columns: repeat(2, 1fr);
+    --grid-count: 2;
   }
 
   .video-list__title {
@@ -676,10 +684,7 @@ iframe {
   }
 
   .video-list__items {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 100%;
+    --grid-count: 1;
   }
 
   .video-list__title {
