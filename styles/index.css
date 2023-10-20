@@ -293,7 +293,7 @@ iframe {
   display: none;
 }
 
-.video-card__favorite_active .star {
+.video-card__favorite.active .star {
   display: block;
 }
 
@@ -379,10 +379,10 @@ iframe {
   display: none;
 }
 
-.video__link_active .video__no-favorite {
+.video__link.active .video__no-favorite {
   display: none;
 }
-.video__link_active .video__favorite {
+.video__link.active .video__favorite {
   display: block;
 }
 
