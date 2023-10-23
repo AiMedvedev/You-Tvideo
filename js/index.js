@@ -77,12 +77,12 @@ const displayVideoList = (videos) => {
         li.innerHTML = `
         <article class="video-card">
             <a href="/video.html?id=${video.id}" class="video-card__link">
-                <img src="${video.snippet.thumbnails.high?.url || 
+                <img src="${video.snippet.thumbnails.high?.url ||
                             video.snippet.thumbnails.standart?.url}" alt="Превью видео ${video.snippet.title}"
                     class="video-card__thumbnail">
                 <h3 class="video-card__title">${video.snippet.title}</h3>
                 <p class="video-card__channel">${video.snippet.channelTitle}</p>
-                <p class="video-card__duration">${getCorrectDurationTime(video.contentDetails.duration)}</p>
+                <p class="video-card__duration">${convertDuration(video.contentDetails.duration)}</p>
             </a>
             <button class="video-card__favorite favorite ${
                 favouriteIds.includes(video.id) ? 'active' : ''
@@ -90,13 +90,13 @@ const displayVideoList = (videos) => {
                 <svg class="favorite__icon">
                     <use class="star-o" xlink:href="/image/sprite.svg#star-ob" />
                     <use class="star" xlink:href="/image/sprite.svg#star" />
-                </svg> 
+                </svg>
             </button>
         </article>
         `;
         return li;
     });
-    
+
     videoListItems.append(...videoList);
 }
 
@@ -111,12 +111,12 @@ const displaySimilarList = (videos, videoId) => {
         li.innerHTML = `
         <article class="video-card">
             <a href="/video.html?id=${video.id}" class="video-card__link">
-                <img src="${video.snippet.thumbnails.high?.url || 
+                <img src="${video.snippet.thumbnails.high?.url ||
                             video.snippet.thumbnails.standart?.url}" alt="Превью видео ${video.snippet.title}"
                     class="video-card__thumbnail">
                 <h3 class="video-card__title">${video.snippet.title}</h3>
                 <p class="video-card__channel">${video.snippet.channelTitle}</p>
-                <p class="video-card__duration">${getCorrectDurationTime(video.contentDetails.duration)}</p>
+                <p class="video-card__duration">${convertDuration(video.contentDetails.duration)}</p>
             </a>
             <button class="video-card__favorite favorite ${
                 favouriteIds.includes(video.id) ? 'active' : ''
@@ -124,7 +124,7 @@ const displaySimilarList = (videos, videoId) => {
                 <svg class="favorite__icon">
                     <use class="star-o" xlink:href="/image/sprite.svg#star-ob" />
                     <use class="star" xlink:href="/image/sprite.svg#star" />
-                </svg> 
+                </svg>
             </button>
         </article>
         `;
@@ -184,72 +184,56 @@ const formatDate = (str) => {
     return formatter.format(date);
 }
 
+
 const getCorrectDurationTime = (duration) => {
     let hours = 0;
     let minutes = 0;
     let seconds = 0;
- 
+
     duration = duration.replace('PT','');
- 
+
     if (duration.indexOf('H') > -1) {
         let hours_split = duration.split('H');
         hours = parseInt(hours_split[0]);
         duration  = hours_split[1];
     }
- 
+
     if (duration.indexOf('M') > -1) {
         let minutes_split = duration.split('M');
         minutes = parseInt(minutes_split[0]);
         duration = minutes_split[1];
     }
- 
+
     if (duration.indexOf('S') > -1) {
         let seconds_split = duration.split('S');
         seconds = parseInt(seconds_split[0]);
     }
- 
+
     let str = "";
-    
+
     if (hours != 0 && hours == 1) { str += hours + " час "; }
     if (hours != 0 && hours >= 2) { str += hours + " часa "; }
     if (minutes == 0) { str += "00" +  " мин "; }
     else if (minutes < 10) { str += "0" + minutes + " мин "; }
     else if (minutes > 10) { str += minutes + " мин "; }
- 
+
     if (seconds > 0 && seconds < 10) { str += "0" + seconds + " сек"; }
     else if (seconds < 10) { str += "0" + seconds + " сек"; }
     else if (seconds > 10) { str += seconds + " сек"; }
- 
+
     return str;
 }
 
 // Реализация автора
 
-/* const convertDuration = (isoDuration) => {
-    const hoursMatch = isoDuration.match(/(\d+)H/);
-    const minutesMatch = isoDuration.match(/(\d+)M/);
-    const secondsMatch = isoDuration.match(/(\d+)S/);
-
-    const hours = hoursMatch ? parseInt(hoursMatch[1]) : 0;
-    const minutes = minutesMatch ? parseInt(minutesMatch[1]) : 0;
-    const seconds = secondsMatch ? parseInt(secondsMatch[1]) : 0;
-
-    let result = "";
-
-    if (hours > 0) {
-        result += `${hours} ч `
-    }
-
-    if (minutes > 0) {
-        result += `${minutes} мин `
-    }
-
-    if (seconds > 0) {
-        result += `${seconds} сек`
-    }
-
-    return result.trim();
-} */
+const convertDuration = (isoDuration) => {
+    const result = isoDuration
+        .slice(2)
+        .replace("H", " ч ")
+        .replace("M", " мин ")
+        .replace("S", " сек");
+    return result;
+}
 
 const init = () => {
     const urlSearchParams = new URLSearchParams(location.search);

@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": true,
+    "files.trimTrailingWhitespace": true,
+    "auto-close-tag.insertSpaceBeforeSelfClosingTag": true,
+    "eslint.codeActionsOnSave.rules": null,
+    "emmet.preferences": {
+        "output.reverseAttributes": true
+    },
+    "editor.unicodeHighlight.nonBasicASCII": false
+}
