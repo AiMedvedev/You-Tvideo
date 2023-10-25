@@ -292,6 +292,10 @@ input::-webkit-search-cancel-button {
   text-overflow: ellipsis;
 }
 
+.video-card__description_active:hover {
+  cursor: pointer;
+}
+
 .video-card__favourite {
   position: absolute;
   top: 12px;
