@@ -314,13 +314,13 @@ const createHeader = () => {
     <div class="container header__container">
         <a class="header__link" href="/">
             <svg class="header__logo" viewBox="0 0 240 32" role="img" aria-label="Логотип сервиса You-Tvideo">
-                <use xlink:href="/image/sprite.svg#logo-orange" />
+                <use xlink:href="./image/sprite.svg#logo-orange" />
             </svg>
         </a>
         <a href="#/favourite" class="header__link header__link_favourite">
             <span class="header__link-text">Избранное</span>
             <svg class="header__favourite-icon">
-                <use xlink:href="/image/sprite.svg#star-ob" />
+                <use xlink:href="./image/sprite.svg#star-ob" />
             </svg>
         </a>
     </div>
@@ -439,6 +439,7 @@ const init = () => {
 
     router.on({
         '/': indexRoute,
+        '/index': indexRoute,
         '/video/:id': videoRoute,
         '/favourite': favouriteRoute,
         '/search': searchRoute
