@@ -139,10 +139,10 @@ const createVideoList = (videos, titleText, pagination) => {
                 <p class="video-card__channel">${video.snippet.channelTitle}</p>
                 ${video.contentDetails ? `<p class="video-card__duration">${convertDuration(video.contentDetails.duration)}</p>` : ''}
             </a>
-            <button class="video-card__favorite favorite ${
+            <button class="video-card__favourite favourite ${
                 favouriteIds.includes(id) ? 'active' : ''
             }" type="button" aria-label="Добавить в избранное" data-video-id="${id}">
-                <svg class="favorite__icon">
+                <svg class="favourite__icon">
                     <use class="star-o" xlink:href="/image/sprite.svg#star-bw" />
                     <use class="star" xlink:href="/image/sprite.svg#star" />
                 </svg>
@@ -206,15 +206,15 @@ const createVideo = (video) => {
                     </p>
                     <p class="video-card__description">${video.snippet.description}</p>
                 </div>
-                <button href="#/favourite" class="video__link favorite ${
+                <button href="#/favourite" class="video__link favourite ${
                     favouriteIds.includes(video.id) ? 'active' : ''
                 }" data-video-id="${video.id}">
-                    <span class="video__favorite">В избранном</span>
-                    <span class="video__no-favorite">В избранное</span>
-                    <svg class="video__icon video__favorite">
+                    <span class="video__favourite">В избранном</span>
+                    <span class="video__no-favourite">В избранное</span>
+                    <svg class="video__icon video__favourite">
                         <use xlink:href="/image/sprite.svg#star"/>
                     </svg>
-                    <svg class="video__icon video__no-favorite">
+                    <svg class="video__icon video__no-favourite">
                         <use xlink:href="/image/sprite.svg#star-ob"/>
                     </svg>
                 </button>
@@ -317,7 +317,7 @@ const createHeader = () => {
                 <use xlink:href="/image/sprite.svg#logo-orange" />
             </svg>
         </a>
-        <a href="#/favourite" class="header__link header__link_favorite">
+        <a href="#/favourite" class="header__link header__link_favourite">
             <span class="header__link-text">Избранное</span>
             <svg class="header__favourite-icon">
                 <use xlink:href="/image/sprite.svg#star-ob" />
@@ -446,7 +446,7 @@ const init = () => {
     .resolve();
 
     document.body.addEventListener('click', ({target}) => {
-        const itemFavourite = target.closest('.favorite');
+        const itemFavourite = target.closest('.favourite');
 
         if (itemFavourite) {
             const videoId = itemFavourite.dataset.videoId;
