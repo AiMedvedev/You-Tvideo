@@ -286,6 +286,12 @@ input::-webkit-search-cancel-button {
   letter-spacing: 0.02em;
 }
 
+.video-card__description_active {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .video-card__favourite {
   position: absolute;
   top: 12px;

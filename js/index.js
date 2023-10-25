@@ -204,7 +204,10 @@ const createVideo = (video) => {
                         <span class="video-card__views">${parseInt(video.statistics.viewCount).toLocaleString()} просмотр</span>
                         <span class="video-card__date">Дата премьеры: ${formatDate(video.snippet.publishedAt)}</span>
                     </p>
-                    <p class="video-card__description">${video.snippet.description}</p>
+                    <p class="video-card__description video-card__description_active"
+                        onclick="document.querySelector('.video-card__description').classList.remove('video-card__description_active');"
+                        >${video.snippet.description}
+                    </p>
                 </div>
                 <button href="#/favourite" class="video__link favourite ${
                     favouriteIds.includes(video.id) ? 'active' : ''
